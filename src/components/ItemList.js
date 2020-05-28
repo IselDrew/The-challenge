@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
+import { createSelector } from 'reselect';
+
+import { ItemsTree } from './TreeItems';
 
 class ItemList extends Component {
   componentDidMount() {
@@ -8,15 +11,18 @@ class ItemList extends Component {
   }
 
   render() {
-    const { items, isLoading } = this.props;
+    const { items, isLoading, sortedItems } = this.props;
     return isLoading ? (
       <div>Loading...</div>
     ) : (
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.label}</li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {items.map((item) => (
+            <li key={item.id}>{item.label}</li>
+          ))}
+        </ul>
+        <ItemsTree items={sortedItems} />
+      </div>
     );
   }
 }
@@ -24,11 +30,27 @@ class ItemList extends Component {
 ItemList.propTypes = {
   fetchData: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
+  sortedItems: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
+
+function formTree(items, id = 0) {
+  return items
+    .filter((item) => item.parent_id === id)
+    .map((item) => ({ ...item, children: formTree(items, item.id) }));
+}
+
+const sortItems = createSelector(
+  (state) => state.items,
+  (items) => {
+    return formTree(items);
+  }
+);
 
 const mapStateToProps = (state) => {
   return {
     items: state.items,
+    sortedItems: sortItems(state),
     isLoading: state.apiCallsInProgress > 0,
   };
 };
