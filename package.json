@@ -6,7 +6,9 @@
   "scripts": {
     "build": "nwb build-react-app",
     "clean": "nwb clean-app",
-    "start": "nwb serve-react-app"
+    "start": "nwb serve-react-app",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "react": "^15.3.2",
@@ -17,6 +19,9 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "eslint": "^7.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.20.0",
     "jest": "^26.0.1",
     "nwb": "0.12.x"
   },
