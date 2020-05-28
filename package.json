@@ -8,7 +8,8 @@
     "clean": "nwb clean-app",
     "start": "nwb serve-react-app",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "jest"
   },
   "dependencies": {
     "react": "^15.3.2",
@@ -19,6 +20,7 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "eslint": "^7.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-react": "^7.20.0",

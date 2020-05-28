@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-function actionTypeEndsIndSucces(type) {
+function actionTypeEndsInSucces(type) {
   if (type.substring(type.length - 8) === '_SUCCESS') {
     return type;
   }
@@ -15,7 +15,7 @@ export default function apiCallStatusReduce(
     case types.BEGIN_API_CALL:
       return state + 1;
     case types.API_CALL_ERROR:
-    case actionTypeEndsIndSucces(action.type):
+    case actionTypeEndsInSucces(action.type):
       return state - 1;
     default:
       return state;
