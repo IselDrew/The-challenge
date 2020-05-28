@@ -3,38 +3,40 @@ import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
 
 class ItemList extends Component {
-    componentDidMount() {
-        this.props.fetchData('http://5af1eee530f9490014ead8c4.mockapi.io/items');
-    }
+  componentDidMount() {
+    this.props.fetchData('http://5af1eee530f9490014ead8c4.mockapi.io/items');
+  }
 
-    render() {
-        return (
-            <ul>
-                {this.props.items.map((item) => (
-                    <li key={item.id}>
-                        {item.label}
-                    </li>
-                ))}
-            </ul>
-        );
-    }
+  render() {
+    const { items, isLoading } = this.props;
+    return isLoading ? (
+      <div>Loading...</div>
+    ) : (
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>{item.label}</li>
+        ))}
+      </ul>
+    );
+  }
 }
 
 ItemList.propTypes = {
-    fetchData: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
-    return {
-        items: state.items,
-    };
+  return {
+    items: state.items,
+    isLoading: state.apiCallsInProgress > 0,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
-    };
+  return {
+    fetchData: (url) => dispatch(itemsFetchData(url)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
