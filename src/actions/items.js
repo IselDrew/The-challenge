@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import { beginApiCall } from './apiStatusAction';
+import { beginApiCall, apiCallError } from './apiStatusAction';
 
 export function itemsFetchDataSuccess(items) {
   return {
@@ -14,7 +14,8 @@ export function itemsFetchData(url) {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          throw Error(response.statusText);
+          dispatch(apiCallError(response.statusText));
+          return;
         }
 
         return response;
