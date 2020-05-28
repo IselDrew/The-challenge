@@ -1,5 +1,5 @@
-import apiCallStatusReduce from './apiStatusReducer';
-import * as actions from '../actions/apiStatusAction';
+import apiCallStatusReduce from '../src/reducers/apiStatusReducer';
+import * as actions from '../src/actions/apiStatusAction';
 
 describe('apiStatusReducer', () => {
   it('Should increment amount of api calls when passed BEGIN_API_CALL', () => {

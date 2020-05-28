@@ -1,5 +1,5 @@
-import { items as itemsReducer } from './items';
-import * as actions from '../actions/items';
+import { items as itemsReducer } from '../src/reducers/items';
+import * as actions from '../src/actions/items';
 
 describe('ItemsReducer', () => {
   it('Should load data when passed ITEMS_FETCH_DATA_SUCCESS', () => {

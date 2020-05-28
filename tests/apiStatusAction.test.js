@@ -1,5 +1,5 @@
-import * as apiStatusAction from './apiStatusAction';
-import * as types from './actionTypes';
+import * as apiStatusAction from '../src/actions/apiStatusAction';
+import * as types from '../src/actions/actionTypes';
 
 describe('beginApiCall', () => {
   it('should create an BEGIN_API_CALL action', () => {

@@ -1,5 +1,5 @@
-import * as itemsAction from './items';
-import * as types from './actionTypes';
+import * as itemsAction from '../src/actions/items';
+import * as types from '../src/actions/actionTypes';
 
 describe('itemsFetchDataSuccess', () => {
   it('should create an ITEMS_FETCH_DATA_SUCCESS action', () => {
